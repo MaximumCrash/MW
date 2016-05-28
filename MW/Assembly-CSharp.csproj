@@ -250,14 +250,14 @@
  <Reference Include="ProBuilderCore-Unity5">
  <HintPath>C:/Users/Crash/Documents/GitHub/MW/MW/Assets/ProCore/ProBuilder/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
+ <Reference Include="ProBuilderMeshOps-Unity5">
+ <HintPath>C:/Users/Crash/Documents/GitHub/MW/MW/Assets/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ </Reference>
  <Reference Include="KDTree">
  <HintPath>C:/Users/Crash/Documents/GitHub/MW/MW/Assets/ProCore/ProBuilder/Classes/ClassesLib/KDTree.dll</HintPath>
  </Reference>
  <Reference Include="Triangle">
  <HintPath>C:/Users/Crash/Documents/GitHub/MW/MW/Assets/ProCore/ProBuilder/Classes/ClassesLib/Triangle.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/Crash/Documents/GitHub/MW/MW/Assets/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
