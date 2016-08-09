@@ -1,0 +1,17 @@
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/UnityEngine.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/UnityEditor.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/ProBuilderCore-Unity5.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/ProBuilderMeshOps-Unity5.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/KDTree.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/Triangle.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/Mono.Cecil.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/Unity.DataContract.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/rejontaylor-foster/Downloads/New Unity Project/Temp/bin/Debug/Mono.Cecil.Mdb.dll

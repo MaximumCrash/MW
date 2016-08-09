@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/playbox.unity
+- path: Assets/movement.unity
   isLoaded: 1
   isActive: 1
