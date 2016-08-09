@@ -75,9 +75,9 @@ public class playerManager : MonoBehaviour {
 
 		case WalkSetting.A : {
 				_forceAcceleration = 6440f;
-				_maximumSpeed = 8f;
+				_maximumSpeed = 10f;
 				_timeToStop = 0.2f;
-				airControlRatio = 5f;
+				airControlRatio = 1f;
 				verticalAddForce = 1000f;
 				dropVelocity = 20f;
 				maxSlope = 60f;
@@ -146,20 +146,20 @@ public class playerManager : MonoBehaviour {
 			if (_currentSpeed.magnitude <= 11) {
 				_timeToStop = 0.1f;
 				_bobSpeed = 0.2f;
-				_bobAmount = 0.02f;
+				_bobAmount = 0.025f;
 
 			} else if (_currentSpeed.magnitude <= 25) {
 				_timeToStop = 0.5f;
-				_bobSpeed = 0.3f;
-				_bobAmount = 0.025f;
+				_bobSpeed = 0.35f;
+				_bobAmount = 0.032f;
 
 			} else if (_currentSpeed.magnitude <= 38) {
 				_timeToStop = 0.64f;
-				_bobSpeed = 0.4f;
-				_bobAmount = 0.032f;
+				_bobSpeed = 0.45f;
+				_bobAmount = 0.04f;
 			}
 			else {
-				_bobSpeed = 0.5f;
+				_bobSpeed = 0.55f;
 				_bobAmount = 0.06f;
 			}
 
@@ -185,7 +185,7 @@ public class playerManager : MonoBehaviour {
 		{
 			if (_onGround && _currentSpeed.magnitude < 1) {
 				//Complete Stop.
-				_maximumSpeed = 8;
+				_maximumSpeed = 10f;
 				_forceAcceleration = 5640f;
 				_timeToStop = 0.2f;
 			}
@@ -210,9 +210,9 @@ public class playerManager : MonoBehaviour {
 
 		}
 
-		if (_maximumSpeed >= 64) {
+		if (_maximumSpeed >= 50) {
 
-			_maximumSpeed = 64;
+			_maximumSpeed = 50;
 			_timeToStop = 0.9f;
 		}
 
