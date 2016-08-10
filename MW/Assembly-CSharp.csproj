@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Controllers\carHeadBob.cs" />
      <Compile Include="Assets\Controllers\carMouseLook.cs" />
+     <Compile Include="Assets\Controllers\cloneController.cs" />
      <Compile Include="Assets\Controllers\playerManager.cs" />
      <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
      <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />

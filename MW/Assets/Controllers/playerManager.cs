@@ -67,6 +67,8 @@ public class playerManager : MonoBehaviour {
 	private float floorOldY;
 	public float myRot = 0f;
 
+	public GameObject clone;
+
 	void Awake()
 	{
 		player = this;
@@ -118,6 +120,11 @@ public class playerManager : MonoBehaviour {
 
 		_currentSpeed = new Vector2(GetComponent<Rigidbody>().velocity.x,GetComponent<Rigidbody>().velocity.z);
 		timer += Time.deltaTime;
+
+		if (timer >= 0.1) {
+			timer = 0;
+			Instantiate(clone);
+		}
 
 		/*if (_flip) {
 
@@ -260,11 +267,11 @@ public class playerManager : MonoBehaviour {
 
 
 		if (Physics.Raycast(transform.position, -Vector3.up, out hitDown)) {
-			Debug.Log("Floor Distance:" + hitDown.distance);
+			//Debug.Log("Floor Distance:" + hitDown.distance);
 		}
 
 		if (Physics.Raycast(transform.position, Vector3.up, out hitUp)) {
-			Debug.Log("Ceiling Distance:" + hitUp.distance);
+			//Debug.Log("Ceiling Distance:" + hitUp.distance);
 		}
 	}
 

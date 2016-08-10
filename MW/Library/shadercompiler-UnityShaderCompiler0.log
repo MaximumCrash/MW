@@ -1,2 +1,110 @@
 Base path: /Applications/Unity/Unity.app/Contents
 Cmd: getPlatforms
+Cmd: preprocess
+  insize=9227 outsize=2043 ok=1
+Cmd: preprocess
+  insize=11318 outsize=798 ok=1
+Cmd: preprocess
+  insize=1689 outsize=334 ok=1
+Cmd: preprocess
+  insize=930 outsize=330 ok=1
+Cmd: preprocess
+  insize=1386 outsize=387 ok=1
+Cmd: preprocess
+  insize=3925 outsize=639 ok=1
+Cmd: preprocess
+  insize=1230 outsize=384 ok=1
+Cmd: preprocess
+  insize=6635 outsize=781 ok=1
+Cmd: preprocess
+  insize=1868 outsize=255 ok=1
+Cmd: preprocess
+  insize=1409 outsize=330 ok=1
+Cmd: preprocess
+  insize=514 outsize=1509 ok=1
+Cmd: preprocess
+  insize=1323 outsize=303 ok=1
+Cmd: preprocess
+  insize=2298 outsize=619 ok=1
+Cmd: preprocess
+  insize=966 outsize=252 ok=1
+Cmd: preprocess
+  insize=701 outsize=302 ok=1
+Cmd: preprocess
+  insize=6328 outsize=973 ok=1
+Cmd: preprocess
+  insize=1199 outsize=241 ok=1
+Cmd: preprocess
+  insize=4371 outsize=504 ok=1
+Cmd: preprocess
+  insize=992 outsize=248 ok=1
+Cmd: preprocess
+  insize=1070 outsize=1628 ok=1
+Cmd: preprocess
+  insize=767 outsize=346 ok=1
+Cmd: preprocess
+  insize=12893 outsize=1893 ok=1
+Cmd: preprocess
+  insize=1025 outsize=333 ok=1
+Cmd: preprocess
+  insize=6203 outsize=732 ok=1
+Cmd: preprocess
+  insize=2834 outsize=762 ok=1
+Cmd: preprocess
+  insize=10821 outsize=2530 ok=1
+Cmd: preprocess
+  insize=563 outsize=264 ok=1
+Cmd: preprocess
+  insize=1909 outsize=438 ok=1
+Cmd: preprocess
+  insize=21322 outsize=3739 ok=1
+Cmd: preprocess
+  insize=4002 outsize=531 ok=1
+Cmd: preprocess
+  insize=1168 outsize=333 ok=1
+Cmd: preprocess
+  insize=1174 outsize=435 ok=1
+Cmd: preprocess
+  insize=737 outsize=249 ok=1
+Cmd: preprocess
+  insize=715 outsize=387 ok=1
+Cmd: preprocess
+  insize=927 outsize=398 ok=1
+Cmd: preprocess
+  insize=5320 outsize=887 ok=1
+Cmd: preprocess
+  insize=879 outsize=389 ok=1
+Cmd: preprocess
+  insize=716 outsize=286 ok=1
+Cmd: preprocess
+  insize=720 outsize=299 ok=1
+Cmd: preprocess
+  insize=862 outsize=275 ok=1
+Cmd: preprocess
+  insize=2015 outsize=946 ok=1
+Cmd: preprocess
+  insize=5095 outsize=700 ok=1
+Cmd: preprocess
+  insize=1139 outsize=364 ok=1
+Cmd: preprocess
+  insize=512 outsize=241 ok=1
+Cmd: preprocess
+  insize=1595 outsize=452 ok=1
+Cmd: preprocess
+  insize=5418 outsize=865 ok=1
+Cmd: compileSnippet
+  api=15 type=0 insize=608 outsize=4034 kw=SHADOWS_DEPTH _ALPHAPREMULTIPLY_ON pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
+Cmd: compileSnippet
+  api=15 type=1 insize=608 outsize=0 kw=SHADOWS_DEPTH _ALPHAPREMULTIPLY_ON pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
+Cmd: compileSnippet
+  api=15 type=0 insize=986 outsize=15181 kw=DIRECTIONAL LIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _EMISSION _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A _ALPHAPREMULTIPLY_ON pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
+Cmd: compileSnippet
+  api=15 type=1 insize=986 outsize=0 kw=DIRECTIONAL LIGHTMAP_OFF DYNAMICLIGHTMAP_OFF _EMISSION _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A _ALPHAPREMULTIPLY_ON pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
+Cmd: compileSnippet
+  api=15 type=0 insize=912 outsize=7219 kw=DIRECTIONAL _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A _ALPHAPREMULTIPLY_ON pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
+Cmd: compileSnippet
+  api=15 type=1 insize=912 outsize=0 kw=DIRECTIONAL _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A _ALPHAPREMULTIPLY_ON pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
+Cmd: compileSnippet
+  api=15 type=0 insize=1503 outsize=1267 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
+Cmd: compileSnippet
+  api=15 type=1 insize=1503 outsize=0 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING SHADER_API_DESKTOP ok=1
