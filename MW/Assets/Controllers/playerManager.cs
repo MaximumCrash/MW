@@ -25,6 +25,9 @@ public class playerManager : MonoBehaviour {
 	 private float _maximumSpeed;
 	public float maximumSpeed {get {return _maximumSpeed;} set {_maximumSpeed = value;}}
 	[SerializeField]
+	private float _minimumSpeed;
+	public float minimumSpeed {get {return _minimumSpeed;} set {_minimumSpeed = value;}}
+	[SerializeField]
 	private float _timeToStop;
 	public float timetoStop {get {return _timeToStop;} set {_timeToStop = value;}}
 	public float airControlRatio;
@@ -35,6 +38,7 @@ public class playerManager : MonoBehaviour {
 	[Header ("Vertical Forces")]
 	public float verticalAddForce;
 	public float dropVelocity;
+	private float originalDropVol;
 	public float maxSlope;
 	[Space(10)]
 	[Header ("Player Checks")]
@@ -69,25 +73,31 @@ public class playerManager : MonoBehaviour {
 
 	public GameObject clone;
 
+	CursorLockMode wantedMode;
+
 	void Awake()
 	{
+		wantedMode = CursorLockMode.Locked;
+		SetCursorState ();
 		player = this;
 
 		switch (walkSetting) {
 
 		case WalkSetting.A : {
 				_forceAcceleration = 6440f;
-				_maximumSpeed = 10f;
+				_minimumSpeed = 5f;
+				_maximumSpeed = _minimumSpeed;
 				_timeToStop = 0.2f;
 				airControlRatio = 1f;
 				verticalAddForce = 1000f;
-				dropVelocity = 20f;
+				dropVelocity = 100f;
 				maxSlope = 60f;
 				break;
 			}
 		case WalkSetting.B : {
 				_forceAcceleration = 6440f;
-				_maximumSpeed = 8f;
+				_minimumSpeed = 5f;
+				_maximumSpeed = _minimumSpeed;
 				_timeToStop = 0.2f;
 				airControlRatio = 0.1f;
 				verticalAddForce = 20f;
@@ -97,7 +107,8 @@ public class playerManager : MonoBehaviour {
 			}
 		case WalkSetting.C : {
 				_forceAcceleration = 6440f;
-				_maximumSpeed = 8f;
+				_minimumSpeed = 7f;
+				_maximumSpeed = _minimumSpeed;
 				_timeToStop = 0.2f;
 				airControlRatio = 0.1f;
 				verticalAddForce = 20f;
@@ -110,9 +121,16 @@ public class playerManager : MonoBehaviour {
 				break;
 			}
 		}
-
+		originalDropVol = dropVelocity;
 		timer = 0;
 		_flip = false;
+	}
+
+	void SetCursorState ()
+	{
+		Cursor.lockState = wantedMode;
+		// Hide cursor when locking
+		Cursor.visible = (CursorLockMode.Locked != wantedMode);
 	}
 
 	void FixedUpdate()
@@ -143,14 +161,10 @@ public class playerManager : MonoBehaviour {
 //
 		if(Input.GetAxis("Vertical") > 0.3)
 		{
-			//If Moving Forward
-			if (_onGround) {
-				_maximumSpeed += Time.deltaTime * 2;
-				_forceAcceleration += Time.deltaTime *8;
-			}
 
 
-			if (_currentSpeed.magnitude <= 11) {
+
+			if (_currentSpeed.magnitude <= minimumSpeed+1) {
 				_timeToStop = 0.1f;
 				_bobSpeed = 0.2f;
 				_bobAmount = 0.025f;
@@ -173,13 +187,8 @@ public class playerManager : MonoBehaviour {
 		}
 		else if (Input.GetAxis("Vertical") < -0.3)
 		{
-			//If Moving Backwards
-			if (_onGround) {
-				_maximumSpeed += Time.deltaTime;
-				_forceAcceleration += Time.deltaTime * 3;
-			}
 
-			if (_currentSpeed.magnitude <= 11) {
+			if (_currentSpeed.magnitude <= minimumSpeed+1) {
 				_timeToStop = 0.1f;
 			} else if (_currentSpeed.magnitude <= 25) {
 				_timeToStop = 0.3f;
@@ -192,7 +201,7 @@ public class playerManager : MonoBehaviour {
 		{
 			if (_onGround && _currentSpeed.magnitude < 1) {
 				//Complete Stop.
-				_maximumSpeed = 10f;
+				_maximumSpeed = _minimumSpeed;
 				_forceAcceleration = 5640f;
 				_timeToStop = 0.2f;
 			}
@@ -308,6 +317,9 @@ public class playerManager : MonoBehaviour {
 
 	void Update()
 	{
+		if (Input.GetKeyDown (KeyCode.Escape))
+			Cursor.lockState = wantedMode = CursorLockMode.None;
+
 		FloorMeasure();
 		if (_flip) {
 			if (myRot > -0.8) {
@@ -336,23 +348,67 @@ cam.GetComponent<carHeadBob>().midpoint= myRot;
 		}*/
 
 		//Debug.Log(GetComponent<Rigidbody>().velocity.y);
-
-		if (Input.GetMouseButtonDown(0)) {
-				if (!_flip)
-					_flip = true;
-				else
-					_flip = false;
-
-				flipGrav();
-
-		}
-
-		if (Input.GetMouseButton(0)){
-			_mouseState = true;
+		if (_mouseState) {
+			//If Moving Forward
+			if (_onGround) {
+				_maximumSpeed += Time.deltaTime * 2;
+				_forceAcceleration += Time.deltaTime * 8;
+			} else {
+				if (_flip) {
+					GetComponent<Rigidbody> ().AddForce(0, dropVelocity, 0);
+					dropVelocity += Time.deltaTime * 10;
+					_maximumSpeed += Time.deltaTime/2;
+					_forceAcceleration += Time.deltaTime * 2;
+				}
+				else {
+					GetComponent<Rigidbody> ().AddForce (0, -dropVelocity, 0);
+					dropVelocity -= Time.deltaTime * 10;
+					_maximumSpeed += Time.deltaTime/2;
+					_forceAcceleration += Time.deltaTime * 2;
+				}
+			}
 		}
 		else {
-			_mouseState = false;
+			if (_onGround) {
+				if (_maximumSpeed > _minimumSpeed) {
+					_maximumSpeed -= Time.deltaTime;
+					_forceAcceleration -= Time.deltaTime * 15;
+				}
+			}
+			else {
+
+			}
 		}
+
+
+		if (Input.GetMouseButtonDown(0) && _flip==true){
+				_flip = false;
+				flipGrav();
+		}
+
+		if (Input.GetMouseButtonDown (1) && _flip==false) {
+				_flip = true;
+				flipGrav();
+		}
+
+		if (_flip) {
+			if (Input.GetMouseButton(1)){
+				_mouseState = true;
+			}
+			else {
+				_mouseState = false;
+			}
+		}
+		else {
+			if (Input.GetMouseButton(0)){
+				_mouseState = true;
+			}
+			else {
+				_mouseState = false;
+			}
+		}
+
+
 		_hardFall = _mouseState;
 
 		if (Input.GetButtonDown ("Jump")) {
@@ -390,26 +446,37 @@ cam.GetComponent<carHeadBob>().midpoint= myRot;
 		}
 	}
 
+	void onLanded() {
+		cam.GetComponent<carHeadBob>().Landing();
+		if (_flip) {
+			dropVelocity = originalDropVol;
+		}
+		else {
+			dropVelocity = -originalDropVol;
+		}
+	}
+
 	void OnCollisionStay (Collision collision)
 	{
 		foreach (ContactPoint contact in collision.contacts)
 		{
 			if (Vector3.Angle(contact.normal, Vector3.up) < maxSlope)
 			{
-
 				_hardFall = false;
 				if (!_onGround) {
-					cam.GetComponent<carHeadBob>().Landing();
+					onLanded();
 					_onGround = true;
+					dropVelocity = originalDropVol;
 				}
 
 			}
 		}
 
-		if (CollisionFlags.Above != 0) {
+		if (CollisionFlags.Above != 0 && _flip) {
 			if (!_onGround) {
-				cam.GetComponent<carHeadBob>().Landing();
+				onLanded();
 				_onGround = true;
+				dropVelocity = originalDropVol;
 			}
 		}
 	}
