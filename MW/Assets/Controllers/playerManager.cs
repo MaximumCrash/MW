@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class playerManager : MonoBehaviour {
 	public static playerManager player;
 
-	public enum WalkSetting {A, B, C, Custom};
+	public enum WalkSetting {Code, Custom};
 
 	[Space(5)]
 	[Header ("Player Walk Setting")]
@@ -71,6 +71,12 @@ public class playerManager : MonoBehaviour {
 	private float floorOldY;
 	public float myRot = 0f;
 
+	private float _floorCaster;
+	public float floorCaster {get {return _floorCaster;}}
+
+	private float _ceilCaster;
+	public float ceilCast {get {return _ceilCaster;}}
+
 	public GameObject clone;
 
 	CursorLockMode wantedMode;
@@ -81,46 +87,18 @@ public class playerManager : MonoBehaviour {
 		SetCursorState ();
 		player = this;
 
-		switch (walkSetting) {
-
-		case WalkSetting.A : {
-				_forceAcceleration = 6440f;
-				_minimumSpeed = 5f;
-				_maximumSpeed = _minimumSpeed;
-				_timeToStop = 0.2f;
-				airControlRatio = 1f;
-				verticalAddForce = 1000f;
-				dropVelocity = 100f;
-				maxSlope = 60f;
-				break;
-			}
-		case WalkSetting.B : {
-				_forceAcceleration = 6440f;
-				_minimumSpeed = 5f;
-				_maximumSpeed = _minimumSpeed;
-				_timeToStop = 0.2f;
-				airControlRatio = 0.1f;
-				verticalAddForce = 20f;
-				dropVelocity = 20f;
-				maxSlope = 60f;
-				break;
-			}
-		case WalkSetting.C : {
-				_forceAcceleration = 6440f;
-				_minimumSpeed = 7f;
-				_maximumSpeed = _minimumSpeed;
-				_timeToStop = 0.2f;
-				airControlRatio = 0.1f;
-				verticalAddForce = 20f;
-				dropVelocity = 20f;
-				maxSlope = 60f;
-				break;
-			}
-		case WalkSetting.Custom : {
-
-				break;
-			}
+		if (walkSetting == WalkSetting.Code)
+		{
+			_forceAcceleration = 6440f;
+			_minimumSpeed = 7f;
+			_maximumSpeed = _minimumSpeed;
+			_timeToStop = 0.2f;
+			airControlRatio = 1f;
+			verticalAddForce = 1000f;
+			dropVelocity = 100f;
+			maxSlope = 60f;
 		}
+
 		originalDropVol = dropVelocity;
 		timer = 0;
 		_flip = false;
@@ -135,89 +113,72 @@ public class playerManager : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-
 		_currentSpeed = new Vector2(GetComponent<Rigidbody>().velocity.x,GetComponent<Rigidbody>().velocity.z);
 		timer += Time.deltaTime;
 
-		if (timer >= 0.1) {
+		if (timer >= 0.1)
+		{
 			timer = 0;
 			Instantiate(clone);
 		}
 
-		/*if (_flip) {
-
-			if (camRot < 180) {
-				camRot += Time.deltaTime * 300;
-				camera.transform.localRotation = Quaternion.AngleAxis (camRot, this.transform.forward);
-			}
-		} else {
-			if (camRot > 0) {
-				camRot -= Time.deltaTime * 300;
-				camera.transform.Rotate (0, 0, camRot);
-				camera.transform.localRotation = Quaternion.AngleAxis (camRot, this.transform.forward);
-			}
-		}*/
-		//Debug.Log (_currentSpeed.magnitude);
-//
 		if(Input.GetAxis("Vertical") > 0.3)
 		{
-
-
-
-			if (_currentSpeed.magnitude <= minimumSpeed+1) {
+			if (_currentSpeed.magnitude <= minimumSpeed+1)
+			{
 				_timeToStop = 0.1f;
 				_bobSpeed = 0.2f;
 				_bobAmount = 0.025f;
 
-			} else if (_currentSpeed.magnitude <= 25) {
+			}
+			else if (_currentSpeed.magnitude <= 25)
+			{
 				_timeToStop = 0.5f;
 				_bobSpeed = 0.35f;
 				_bobAmount = 0.032f;
 
-			} else if (_currentSpeed.magnitude <= 38) {
+			}
+			else if (_currentSpeed.magnitude <= 38)
+			{
 				_timeToStop = 0.64f;
 				_bobSpeed = 0.45f;
 				_bobAmount = 0.04f;
 			}
-			else {
+			else
+			{
 				_bobSpeed = 0.55f;
 				_bobAmount = 0.06f;
 			}
-
 		}
 		else if (Input.GetAxis("Vertical") < -0.3)
 		{
-
-			if (_currentSpeed.magnitude <= minimumSpeed+1) {
+			if (_currentSpeed.magnitude <= minimumSpeed+1)
+			{
 				_timeToStop = 0.1f;
-			} else if (_currentSpeed.magnitude <= 25) {
+			}
+			else if (_currentSpeed.magnitude <= 25)
+			{
 				_timeToStop = 0.3f;
-
-			} else if (_currentSpeed.magnitude > 25) {
+			}
+			else if (_currentSpeed.magnitude > 25)
+			{
 				_timeToStop = 0.64f;
 			}
 		}
 		else
 		{
-			if (_onGround && _currentSpeed.magnitude < 1) {
+			if (_onGround && _currentSpeed.magnitude < 1)
+			{
 				//Complete Stop.
-				_maximumSpeed = _minimumSpeed;
-				_forceAcceleration = 5640f;
-				_timeToStop = 0.2f;
+				eBrake();
 			}
-			if (cam.fieldOfView > 60) {
-				cam.fieldOfView -= Time.deltaTime*3;
-			}
-
 		}
 
-		if (_currentSpeed.magnitude < 3) {
-			//_maximumSpeed = 8;
-			//_forceAcceleration = 5640f;
-			//_timeToStop = 0.2f;
+		if (_currentSpeed.magnitude < minimumSpeed);
+		{
+			//Complete Stop.
+			eBrake();
 		}
-
-
 
 		if (_currentSpeed.magnitude > _maximumSpeed)
 		{
@@ -226,10 +187,9 @@ public class playerManager : MonoBehaviour {
 
 		}
 
-		if (_maximumSpeed >= 50) {
-
-			_maximumSpeed = 50;
-			_timeToStop = 0.9f;
+		if (_maximumSpeed >= 50)
+		{
+			maxSpeed();
 		}
 
 		Vector3 v = GetComponent<Rigidbody>().velocity;
@@ -270,49 +230,130 @@ public class playerManager : MonoBehaviour {
 		}
 	}
 
-	void FloorMeasure() {
+	void accelerate(float speedInc, float accelInc)
+	{
+		_maximumSpeed += Time.deltaTime * speedInc;
+		_forceAcceleration += Time.deltaTime * accelInc;
+	}
+
+	void decelerate(float speedInc, float accelInc)
+	{
+		_maximumSpeed -= Time.deltaTime * speedInc;
+		_forceAcceleration -= Time.deltaTime * accelInc;
+	}
+
+	void eBrake()
+	{
+		_maximumSpeed = _minimumSpeed;
+		_forceAcceleration = 5640f;
+		_timeToStop = 0.2f;
+	}
+
+	void maxSpeed()
+	{
+		_maximumSpeed = 50;
+		_timeToStop = 0.9f;
+	}
+
+	void floorCheck()
+	{
 		RaycastHit hitDown = new RaycastHit();
 		RaycastHit hitUp = new RaycastHit();
 
-
-		if (Physics.Raycast(transform.position, -Vector3.up, out hitDown)) {
-			//Debug.Log("Floor Distance:" + hitDown.distance);
+		if (!_flip)
+		{
+			if (Physics.Raycast(transform.position, -Vector3.up, out hitDown))
+			{
+				_floorCaster = hitDown.distance;
+	//			Debug.Log("FLOOR: " + _floorCaster);
+			}
+			if (Physics.Raycast(transform.position, Vector3.up, out hitUp))
+			{
+					_ceilCaster = hitUp.distance;
+		//				Debug.Log("CEILING: " + _ceilCaster);
+			}
+		}
+		else
+		{
+			if (Physics.Raycast(transform.position, -Vector3.up, out hitDown))
+			{
+				_floorCaster = hitDown.distance;
+	//			Debug.Log("CEILING: " + _floorCaster);
+			}
+			if (Physics.Raycast(transform.position, Vector3.up, out hitUp))
+			{
+					_ceilCaster = hitUp.distance;
+		//				Debug.Log("FLOOR: " + _ceilCaster);
+			}
 		}
 
-		if (Physics.Raycast(transform.position, Vector3.up, out hitUp)) {
-			//Debug.Log("Ceiling Distance:" + hitUp.distance);
+		Debug.Log(floorCaster);
+
+		if (_floorCaster > 0 && _floorCaster < 3)
+		{
+			if (!_onGround)
+				onLanded(hitDown.collider.gameObject.tag);
+
+			_onGround = true;
+		}
+		else
+		{
+			_onGround = false;
 		}
 	}
 
-	void flipGrav() {
-
-		if (!_flip) { //UP
-			if (_onGround) {
-
+	void flipGrav()
+	{
+		if (!_flip)
+		{ //UP
+			if (_onGround)
+			{
 				GetComponent<Rigidbody> ().AddForce (0, -verticalAddForce, 0);
-
 				Physics.gravity = new Vector3 (0, -9.81f, 0);
-				if (!flipInit) {
+
+				if (!flipInit)
 					flipInit = true;
-				}
 			}
-			else {
+			else
+			{
 				Physics.gravity = new Vector3 (0, -15.81f, 0);
 			}
 
 		}
-		else { //DOWN
-			if (_onGround) {
+		else
+		{ //DOWN
+			if (_onGround)
+			{
 				GetComponent<Rigidbody> ().AddForce (0, verticalAddForce, 0);
-					Physics.gravity = new Vector3 (0, 9.81f, 0);
+				Physics.gravity = new Vector3 (0, 9.81f, 0);
 			}
-			else {
+			else
+			{
 				Physics.gravity = new Vector3 (0, 15.81f, 0);
 			}
+		}
+	}
 
+	void camPosReset()
+	{
+		if (_flip)
+		{
+			if (myRot > -0.8)
+				myRot -= Time.deltaTime*3;
 
+			if (myRot < -0.76)
+				myRot = -0.8f;
+		}
+		else
+		{
+			if (myRot < 0.8)
+				myRot += Time.deltaTime*3;
+
+			if (myRot > 0.76)
+				myRot =  0.8f;
 		}
 
+		cam.GetComponent<carHeadBob>().midpoint= myRot;
 	}
 
 	void Update()
@@ -320,169 +361,96 @@ public class playerManager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape))
 			Cursor.lockState = wantedMode = CursorLockMode.None;
 
-		FloorMeasure();
-		if (_flip) {
-			if (myRot > -0.8) {
-				myRot -= Time.deltaTime*3;
-			}
-			if (myRot < -0.76) {
-				myRot = -0.8f;
-			}
-		}
-		else {
-			if (myRot < 0.8) {
-				myRot += Time.deltaTime*3;
-			}
-			if (myRot > 0.76) {
-				myRot =  0.8f;
-			}
-		}
+		floorCheck();
+		camPosReset();
 
-cam.GetComponent<carHeadBob>().midpoint= myRot;
-
-		/*if (Input.GetButton("Jump")) {
-			_hardFall = true;
-		}
-		else {
-			_hardFall = false;
-		}*/
-
-		//Debug.Log(GetComponent<Rigidbody>().velocity.y);
-		if (_mouseState) {
-			//If Moving Forward
-			if (_onGround) {
-				_maximumSpeed += Time.deltaTime * 2;
-				_forceAcceleration += Time.deltaTime * 8;
-			} else {
-				if (_flip) {
+		if (_mouseState)
+		{
+			//If Accelerating
+			if (_onGround)
+			{
+				accelerate(3f,10f);
+			}
+			else
+			{
+				if (_flip)
+				{
 					GetComponent<Rigidbody> ().AddForce(0, dropVelocity, 0);
 					dropVelocity += Time.deltaTime * 10;
-					_maximumSpeed += Time.deltaTime/2;
-					_forceAcceleration += Time.deltaTime * 2;
-				}
-				else {
-					GetComponent<Rigidbody> ().AddForce (0, -dropVelocity, 0);
-					dropVelocity -= Time.deltaTime * 10;
-					_maximumSpeed += Time.deltaTime/2;
-					_forceAcceleration += Time.deltaTime * 2;
-				}
-			}
-		}
-		else {
-			if (_onGround) {
-				if (_maximumSpeed > _minimumSpeed) {
-					_maximumSpeed -= Time.deltaTime;
-					_forceAcceleration -= Time.deltaTime * 15;
-				}
-			}
-			else {
-
-			}
-		}
-
-
-		if (Input.GetMouseButtonDown(0) && _flip==true){
-				_flip = false;
-				flipGrav();
-		}
-
-		if (Input.GetMouseButtonDown (1) && _flip==false) {
-				_flip = true;
-				flipGrav();
-		}
-
-		if (_flip) {
-			if (Input.GetMouseButton(1)){
-				_mouseState = true;
-			}
-			else {
-				_mouseState = false;
-			}
-		}
-		else {
-			if (Input.GetMouseButton(0)){
-				_mouseState = true;
-			}
-			else {
-				_mouseState = false;
-			}
-		}
-
-
-		_hardFall = _mouseState;
-
-		if (Input.GetButtonDown ("Jump")) {
-
-			if (!_flip) { //If _flip DOWN
-				if (_onGround)
-				{ //If on the floor.
-					if (!_hardFall) {
-						//Boost off the Ground.
-
-
-						_hardFall = true;
-					}
+					accelerate(.5f, 2f);
 				}
 				else
-				{ //If not on the floor.
-					if (_hardFall) {
-						//If holding the _flipKey, increase Drop Speed.
-
-					}
-					else {
-						//If not holding the _flipKey, continue Drop
-
-					}
+				{
+					GetComponent<Rigidbody> ().AddForce (0, -dropVelocity, 0);
+					dropVelocity -= Time.deltaTime * 10;
+					accelerate(.5f, 2f);
 				}
-
-
-				_flip = true;
-			}
-			else { //If _flip UP
-				GetComponent<Rigidbody> ().AddForce (0, -verticalAddForce, 0);
-
-				_flip = false;
 			}
 		}
-	}
-
-	void onLanded() {
-		cam.GetComponent<carHeadBob>().Landing();
-		if (_flip) {
-			dropVelocity = originalDropVol;
-		}
-		else {
-			dropVelocity = -originalDropVol;
-		}
-	}
-
-	void OnCollisionStay (Collision collision)
-	{
-		foreach (ContactPoint contact in collision.contacts)
+		else
 		{
-			if (Vector3.Angle(contact.normal, Vector3.up) < maxSlope)
+			if (_onGround)
 			{
-				_hardFall = false;
-				if (!_onGround) {
-					onLanded();
-					_onGround = true;
-					dropVelocity = originalDropVol;
+				if (_maximumSpeed > _minimumSpeed)
+				{
+					decelerate(1f, 15f);
 				}
-
 			}
 		}
 
-		if (CollisionFlags.Above != 0 && _flip) {
-			if (!_onGround) {
-				onLanded();
-				_onGround = true;
-				dropVelocity = originalDropVol;
+		if (Input.GetMouseButtonDown(0) && _flip==true)
+		{
+				_flip = false;
+				flipGrav();
+		}
+
+		if (Input.GetMouseButtonDown (1) && _flip==false)
+		{
+				_flip = true;
+				flipGrav();
+		}
+
+		if (_flip)
+		{
+			if (Input.GetMouseButton(1))
+			{
+				_mouseState = true;
+			}
+			else
+			{
+				_mouseState = false;
 			}
 		}
+		else
+		{
+			if (Input.GetMouseButton(0))
+			{
+				_mouseState = true;
+			}
+			else
+			{
+				_mouseState = false;
+			}
+		}
+		_hardFall = _mouseState;
 	}
 
-	void OnCollisionExit()
+	void onLanded(string tag)
 	{
-		_onGround = false;
+		cam.GetComponent<carHeadBob>().Landing();
+		if (_flip)
+			dropVelocity = -originalDropVol;
+		else
+			dropVelocity = originalDropVol;
+
+
+		if (_hardFall && tag == "Floor")
+		{
+			Debug.Log("HARD LANDING!");
+			if (_maximumSpeed > _minimumSpeed)
+			{
+				_maximumSpeed -= _maximumSpeed/4;
+			}
+		}
 	}
 }
