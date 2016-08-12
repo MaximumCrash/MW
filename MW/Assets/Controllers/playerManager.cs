@@ -43,14 +43,11 @@ public class playerManager : MonoBehaviour {
 	[Space(10)]
 	[Header ("Player Checks")]
 	[SerializeField]
-	 private bool _onGround = false;
+	 private bool _onGround;
 	public bool onGround {get {return _onGround;}}
 	[SerializeField]
 	 private bool _flip;
 	public bool flip {get {return _flip;}}
-	[SerializeField]
-	private bool _hardFall = false;
-	public bool hardFall {get {return _hardFall;}}
 	[SerializeField]
 	 private bool _mouseState = false;
 	public bool mouseState {get {return _mouseState;}}
@@ -167,18 +164,14 @@ public class playerManager : MonoBehaviour {
 		}
 		else
 		{
-			if (_onGround && _currentSpeed.magnitude < 1)
+			if (_onGround && _currentSpeed.magnitude < minimumSpeed);
 			{
 				//Complete Stop.
 				eBrake();
 			}
 		}
 
-		if (_currentSpeed.magnitude < minimumSpeed);
-		{
-			//Complete Stop.
-			eBrake();
-		}
+
 
 		if (_currentSpeed.magnitude > _maximumSpeed)
 		{
@@ -287,17 +280,19 @@ public class playerManager : MonoBehaviour {
 			}
 		}
 
-		Debug.Log(floorCaster);
 
 		if (_floorCaster > 0 && _floorCaster < 3)
 		{
-			if (!_onGround)
+			if (!_onGround) {
 				onLanded(hitDown.collider.gameObject.tag);
+			}
+
 
 			_onGround = true;
 		}
 		else
 		{
+			Debug.Log("HELLO!");
 			_onGround = false;
 		}
 	}
@@ -393,7 +388,7 @@ public class playerManager : MonoBehaviour {
 			{
 				if (_maximumSpeed > _minimumSpeed)
 				{
-					decelerate(1f, 15f);
+					//decelerate(1f, 15f);
 				}
 			}
 		}
@@ -432,7 +427,6 @@ public class playerManager : MonoBehaviour {
 				_mouseState = false;
 			}
 		}
-		_hardFall = _mouseState;
 	}
 
 	void onLanded(string tag)
@@ -444,12 +438,12 @@ public class playerManager : MonoBehaviour {
 			dropVelocity = originalDropVol;
 
 
-		if (_hardFall && tag == "Floor")
+		if (_mouseState && tag == "Floor")
 		{
 			Debug.Log("HARD LANDING!");
 			if (_maximumSpeed > _minimumSpeed)
 			{
-				_maximumSpeed -= _maximumSpeed/4;
+				//_maximumSpeed -= _maximumSpeed/4;
 			}
 		}
 	}
