@@ -49,7 +49,7 @@ public class playerManager : MonoBehaviour {
 	 private bool _flip;
 	public bool flip {get {return _flip;}}
 	[SerializeField]
-	 private bool _mouseState = false;
+	 private bool _mouseState;
 	public bool mouseState {get {return _mouseState;}}
 	[Space(10)]
 	[Header ("External Attachments")]
@@ -110,6 +110,7 @@ public class playerManager : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+			Debug.Log(GetComponent<Rigidbody>().useGravity);
 		_currentSpeed = new Vector2(GetComponent<Rigidbody>().velocity.x,GetComponent<Rigidbody>().velocity.z);
 		timer += Time.deltaTime;
 
@@ -171,8 +172,6 @@ public class playerManager : MonoBehaviour {
 			}
 		}
 
-
-
 		if (_currentSpeed.magnitude > _maximumSpeed)
 		{
 			_currentSpeed = _currentSpeed.normalized;
@@ -189,37 +188,35 @@ public class playerManager : MonoBehaviour {
 		v.x = _currentSpeed.x;
 		v.z = _currentSpeed.y;
 
-		if (_onGround) {
-
+		if (_onGround)
+		{
 			v.x =  Mathf.SmoothDamp(v.x, 0f, ref _timeToStopVolx, _timeToStop);
 			v.z =  Mathf.SmoothDamp(v.z, 0f, ref _timeToStopVolz, _timeToStop);
 		}
 
 		GetComponent<Rigidbody>().velocity = v;
 
-		if (Input.GetAxis("Vertical") > 0) {
-		if (_onGround)
+		if (Input.GetAxis("Vertical") > 0)
 		{
-			GetComponent<Rigidbody>().useGravity = false;
-			GetComponent<Rigidbody>().AddRelativeForce(Input.GetAxis("Horizontal") * _forceAcceleration * Time.deltaTime, 0, Input.GetAxis("Vertical") * _forceAcceleration * Time.deltaTime);
-		}
-		else
-		{
-			GetComponent<Rigidbody>().useGravity = true;
-			GetComponent<Rigidbody>().AddRelativeForce(Input.GetAxis("Horizontal") * _forceAcceleration * airControlRatio * Time.deltaTime, 0, Input.GetAxis("Vertical") * _forceAcceleration * airControlRatio * Time.deltaTime);
-		}
-		}
-		else {
 			if (_onGround)
 			{
-				GetComponent<Rigidbody>().useGravity = false;
-				GetComponent<Rigidbody>().AddRelativeForce(Input.GetAxis("Horizontal") * _forceAcceleration/1.5f * Time.deltaTime, 0, Input.GetAxis("Vertical") * _forceAcceleration/1.5f * Time.deltaTime);
+				GetComponent<Rigidbody>().AddRelativeForce(Input.GetAxis("Horizontal") * _forceAcceleration * Time.deltaTime, 0, Input.GetAxis("Vertical") * _forceAcceleration * Time.deltaTime);
 			}
 			else
 			{
-				GetComponent<Rigidbody>().useGravity = true;
 				GetComponent<Rigidbody>().AddRelativeForce(Input.GetAxis("Horizontal") * _forceAcceleration * airControlRatio * Time.deltaTime, 0, Input.GetAxis("Vertical") * _forceAcceleration * airControlRatio * Time.deltaTime);
 			}
+		}
+		else
+		{
+				if (_onGround)
+				{
+					GetComponent<Rigidbody>().AddRelativeForce(Input.GetAxis("Horizontal") * _forceAcceleration/1.5f * Time.deltaTime, 0, Input.GetAxis("Vertical") * _forceAcceleration/1.5f * Time.deltaTime);
+				}
+				else
+				{
+					GetComponent<Rigidbody>().AddRelativeForce(Input.GetAxis("Horizontal") * _forceAcceleration * airControlRatio * Time.deltaTime, 0, Input.GetAxis("Vertical") * _forceAcceleration * airControlRatio * Time.deltaTime);
+				}
 		}
 	}
 
@@ -253,49 +250,43 @@ public class playerManager : MonoBehaviour {
 		RaycastHit hitDown = new RaycastHit();
 		RaycastHit hitUp = new RaycastHit();
 
-		if (!_flip)
-		{
 			if (Physics.Raycast(transform.position, -Vector3.up, out hitDown))
 			{
 				_floorCaster = hitDown.distance;
-	//			Debug.Log("FLOOR: " + _floorCaster);
+				//Debug.Log("FLOOR: " + _floorCaster);
+		if (_floorCaster > 0 && _floorCaster < 0.8)
+		{
+			if (!_onGround) {
+				//onLanded(hitDown.collider.gameObject.tag);
+				//_onGround = true;
+
 			}
+
+
+		}
+		else {
+			//_onGround = false;
+			//GetComponent<Rigidbody>().useGravity = true;
+		}
+			}
+			else {
+			//	_onGround = false;
+			//	GetComponent<Rigidbody>().useGravity = true;
+			}
+
 			if (Physics.Raycast(transform.position, Vector3.up, out hitUp))
 			{
 					_ceilCaster = hitUp.distance;
 		//				Debug.Log("CEILING: " + _ceilCaster);
 			}
-		}
-		else
-		{
-			if (Physics.Raycast(transform.position, -Vector3.up, out hitDown))
-			{
-				_floorCaster = hitDown.distance;
-	//			Debug.Log("CEILING: " + _floorCaster);
-			}
-			if (Physics.Raycast(transform.position, Vector3.up, out hitUp))
-			{
-					_ceilCaster = hitUp.distance;
-		//				Debug.Log("FLOOR: " + _ceilCaster);
-			}
-		}
 
 
-		if (_floorCaster > 0 && _floorCaster < 3)
-		{
-			if (!_onGround) {
-				onLanded(hitDown.collider.gameObject.tag);
-			}
 
 
-			_onGround = true;
-		}
-		else
-		{
-			Debug.Log("HELLO!");
-			_onGround = false;
-		}
+
+
 	}
+
 
 	void flipGrav()
 	{
@@ -303,11 +294,8 @@ public class playerManager : MonoBehaviour {
 		{ //UP
 			if (_onGround)
 			{
-				GetComponent<Rigidbody> ().AddForce (0, -verticalAddForce, 0);
-				Physics.gravity = new Vector3 (0, -9.81f, 0);
-
-				if (!flipInit)
-					flipInit = true;
+				GetComponent<Rigidbody>().AddForce(0, -verticalAddForce, 0);
+				Physics.gravity = new Vector3 (0, -15.81f, 0);
 			}
 			else
 			{
@@ -319,14 +307,16 @@ public class playerManager : MonoBehaviour {
 		{ //DOWN
 			if (_onGround)
 			{
-				GetComponent<Rigidbody> ().AddForce (0, verticalAddForce, 0);
-				Physics.gravity = new Vector3 (0, 9.81f, 0);
+				GetComponent<Rigidbody>().AddForce(0, verticalAddForce, 0);
+				Physics.gravity = new Vector3 (0, 15.81f, 0);
+
 			}
 			else
 			{
 				Physics.gravity = new Vector3 (0, 15.81f, 0);
 			}
 		}
+		_onGround = false;
 	}
 
 	void camPosReset()
@@ -370,13 +360,13 @@ public class playerManager : MonoBehaviour {
 			{
 				if (_flip)
 				{
-					GetComponent<Rigidbody> ().AddForce(0, dropVelocity, 0);
+					GetComponent<Rigidbody> ().AddRelativeForce(0, dropVelocity, 0);
 					dropVelocity += Time.deltaTime * 10;
 					accelerate(.5f, 2f);
 				}
 				else
 				{
-					GetComponent<Rigidbody> ().AddForce (0, -dropVelocity, 0);
+					GetComponent<Rigidbody> ().AddRelativeForce (0, -dropVelocity, 0);
 					dropVelocity -= Time.deltaTime * 10;
 					accelerate(.5f, 2f);
 				}
@@ -388,7 +378,7 @@ public class playerManager : MonoBehaviour {
 			{
 				if (_maximumSpeed > _minimumSpeed)
 				{
-					//decelerate(1f, 15f);
+					decelerate(1f, 15f);
 				}
 			}
 		}
@@ -443,8 +433,39 @@ public class playerManager : MonoBehaviour {
 			Debug.Log("HARD LANDING!");
 			if (_maximumSpeed > _minimumSpeed)
 			{
-				//_maximumSpeed -= _maximumSpeed/4;
+				_maximumSpeed -= _maximumSpeed/4;
 			}
 		}
+	}
+
+	void OnCollisionStay (Collision collision)
+	{
+		foreach (ContactPoint contact in collision.contacts)
+		{
+			if (Vector3.Angle(contact.normal, Vector3.up) < maxSlope)
+			{
+
+				if (!_onGround) {
+					cam.GetComponent<carHeadBob>().Landing();
+					_onGround = true;
+					GetComponent<Rigidbody>().useGravity = false;
+				}
+
+			}
+		}
+
+		if (CollisionFlags.Above != 0) {
+			if (!_onGround) {
+				cam.GetComponent<carHeadBob>().Landing();
+				GetComponent<Rigidbody>().useGravity = false;
+				_onGround = true;
+			}
+		}
+	}
+
+	void OnCollisionExit()
+	{
+		_onGround = false;
+		GetComponent<Rigidbody>().useGravity = true;
 	}
 }
