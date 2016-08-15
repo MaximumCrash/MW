@@ -88,7 +88,8 @@ public class playerManager : MonoBehaviour {
 	private Transform myTransform;
 	public 	BoxCollider boxCollider;
 
-	private void Start() {
+	private void Start()
+	{
 		myNormal = transform.up;
 		myTransform = transform;
 		GetComponent<Rigidbody>().freezeRotation = true;
@@ -279,37 +280,13 @@ public class playerManager : MonoBehaviour {
 			{
 				_floorCaster = hitDown.distance;
 				//Debug.Log("FLOOR: " + _floorCaster);
-		if (_floorCaster > 0 && _floorCaster < 0.8)
-		{
-			if (!_onGround) {
-				//onLanded(hitDown.collider.gameObject.tag);
-				//_onGround = true;
-
-			}
-
-
-		}
-		else {
-			//_onGround = false;
-			//GetComponent<Rigidbody>().useGravity = true;
-		}
-			}
-			else {
-			//	_onGround = false;
-			//	GetComponent<Rigidbody>().useGravity = true;
 			}
 
 			if (Physics.Raycast(transform.position, Vector3.up, out hitUp))
 			{
 					_ceilCaster = hitUp.distance;
-		//				Debug.Log("CEILING: " + _ceilCaster);
+					//Debug.Log("CEILING: " + _ceilCaster);
 			}
-
-
-
-
-
-
 	}
 
 
@@ -424,22 +401,19 @@ public class playerManager : MonoBehaviour {
 		}
 		else
 		{
-			if (_onGround)
-			{
-				if (_maximumSpeed > _minimumSpeed)
+				if (_maximumSpeed > _minimumSpeed && _onGround)
 				{
 					decelerate(1.5f, 15f);
 				}
-			}
 		}
 
-		if (Input.GetMouseButtonDown(0) && _flip==true)
+		if (Input.GetMouseButtonDown(0) && _flip)
 		{
 				_flip = false;
 				flipGrav();
 		}
 
-		if (Input.GetMouseButtonDown (1) && _flip==false)
+		if (Input.GetMouseButtonDown (1) && !_flip)
 		{
 				_flip = true;
 				flipGrav();
@@ -448,24 +422,16 @@ public class playerManager : MonoBehaviour {
 		if (_flip)
 		{
 			if (Input.GetMouseButton(1))
-			{
 				_mouseState = true;
-			}
 			else
-			{
 				_mouseState = false;
-			}
 		}
 		else
 		{
 			if (Input.GetMouseButton(0))
-			{
 				_mouseState = true;
-			}
 			else
-			{
 				_mouseState = false;
-			}
 		}
 	}
 
@@ -482,9 +448,7 @@ public class playerManager : MonoBehaviour {
 		{
 			Debug.Log("HARD LANDING!");
 			if (_maximumSpeed > _minimumSpeed)
-			{
 				_maximumSpeed -= _maximumSpeed/4;
-			}
 		}
 	}
 
@@ -492,22 +456,22 @@ public class playerManager : MonoBehaviour {
 	{
 		foreach (ContactPoint contact in collision.contacts)
 		{
-			//Debug.Log(Vector3.Angle(contact.normal, Vector3.up));
-
+			Debug.Log(Vector3.Angle(contact.normal, Vector3.up));
 		 	if (Vector3.Angle(contact.normal, Vector3.up) < maxSlope)
 			{
-
-				if (!_onGround) {
+				if (!_onGround)
+				{
 					cam.GetComponent<carHeadBob>().Landing();
 					_onGround = true;
 					GetComponent<Rigidbody>().useGravity = false;
 				}
-
 			}
 		}
 
-		if (CollisionFlags.Above != 0 && _flip) {
-			if (!_onGround) {
+		if (CollisionFlags.Above != 0 && _flip)
+		{
+			if (!_onGround)
+			{
 				cam.GetComponent<carHeadBob>().Landing();
 				GetComponent<Rigidbody>().useGravity = false;
 				_onGround = true;
