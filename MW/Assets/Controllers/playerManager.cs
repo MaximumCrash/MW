@@ -110,9 +110,14 @@ public class playerManager : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-			Debug.Log(GetComponent<Rigidbody>().useGravity);
+			//Debug.Log(GetComponent<Rigidbody>().useGravity);
+			Debug.Log(_currentSpeed.magnitude);
 		_currentSpeed = new Vector2(GetComponent<Rigidbody>().velocity.x,GetComponent<Rigidbody>().velocity.z);
 		timer += Time.deltaTime;
+
+		if (_currentSpeed.magnitude < minimumSpeed) {
+			_maximumSpeed = minimumSpeed;
+		}
 
 		if (timer >= 0.1)
 		{
@@ -234,7 +239,9 @@ public class playerManager : MonoBehaviour {
 
 	void eBrake()
 	{
-		_maximumSpeed = _minimumSpeed;
+		if (_onGround) {
+			_maximumSpeed = _minimumSpeed;
+		}
 		_forceAcceleration = 5640f;
 		_timeToStop = 0.2f;
 	}
@@ -380,7 +387,7 @@ public class playerManager : MonoBehaviour {
 			{
 				if (_maximumSpeed > _minimumSpeed)
 				{
-					decelerate(1f, 15f);
+					decelerate(1.5f, 15f);
 				}
 			}
 		}
@@ -444,8 +451,8 @@ public class playerManager : MonoBehaviour {
 	{
 		foreach (ContactPoint contact in collision.contacts)
 		{
-			Debug.Log(Vector3.Angle(contact.normal, Vector3.up));
-			//Debug.Log(GetComponent<Rigidbody>().useGravity);
+			//Debug.Log(Vector3.Angle(contact.normal, Vector3.up));
+
 		 	if (Vector3.Angle(contact.normal, Vector3.up) < maxSlope)
 			{
 
