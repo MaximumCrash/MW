@@ -78,6 +78,23 @@ public class playerManager : MonoBehaviour {
 
 	CursorLockMode wantedMode;
 
+	private float gravity = 15.81f;
+	private float deltaGround = 0.2f;
+	private float jumpRange = 10f;
+	private float lerpSpeed = 10;
+	private Vector3 surfaceNormal;
+	private Vector3 myNormal;
+	private float distGround;
+	private Transform myTransform;
+	public 	BoxCollider boxCollider;
+
+	private void Start() {
+		myNormal = transform.up;
+		myTransform = transform;
+		GetComponent<Rigidbody>().freezeRotation = true;
+		distGround = boxCollider.extents.y - boxCollider.center.y;
+	}
+
 	void Awake()
 	{
 		wantedMode = CursorLockMode.Locked;
@@ -110,6 +127,7 @@ public class playerManager : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+		//GetComponent<Rigidbody>().AddForce(-gravity*GetComponent<Rigidbody>().mass*myNormal);
 			//Debug.Log(GetComponent<Rigidbody>().useGravity);
 			Debug.Log(_currentSpeed.magnitude);
 		_currentSpeed = new Vector2(GetComponent<Rigidbody>().velocity.x,GetComponent<Rigidbody>().velocity.z);
@@ -352,6 +370,29 @@ public class playerManager : MonoBehaviour {
 
 	void Update()
 	{
+		/*
+		Ray ray;
+		RaycastHit hit;
+
+		ray = new Ray(myTransform.position, -myNormal);
+		if (Physics.Raycast(ray, out hit)) {
+			_onGround = hit.distance <= distGround + deltaGround;
+			surfaceNormal = hit.normal;
+		}
+		else {
+			_onGround = false;
+			surfaceNormal = Vector3.up;
+		}
+
+
+		myNormal = Vector3.Lerp(myNormal, surfaceNormal, lerpSpeed*Time.deltaTime);
+
+		Vector3 myForward = Vector3.Cross(myTransform.right, myNormal);
+
+		Quaternion targetRot = Quaternion.LookRotation(myForward, myNormal);
+		myTransform.rotation = Quaternion.Lerp(myTransform.rotation, targetRot, lerpSpeed*Time.deltaTime);
+*/
+
 		if (Input.GetKeyDown (KeyCode.Escape))
 			Cursor.lockState = wantedMode = CursorLockMode.None;
 

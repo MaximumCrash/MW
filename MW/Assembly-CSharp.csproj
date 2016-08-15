@@ -45,6 +45,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Controllers\FirstPersonController.cs" />
+     <Compile Include="Assets\Controllers\GravityAttractor.cs" />
+     <Compile Include="Assets\Controllers\GravityBody.cs" />
+     <Compile Include="Assets\Controllers\QM_CharController.cs" />
      <Compile Include="Assets\Controllers\carHeadBob.cs" />
      <Compile Include="Assets\Controllers\carMouseLook.cs" />
      <Compile Include="Assets\Controllers\cloneController.cs" />

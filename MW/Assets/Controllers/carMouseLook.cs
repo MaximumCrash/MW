@@ -25,12 +25,12 @@ public class carMouseLook : MonoBehaviour {
 		mouseLook += smoothV;
 		mouseLook.y = Mathf.Clamp(mouseLook.y,-90f,90f);
 		transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
-		player.transform.eulerAngles = new Vector3(player.transform.localRotation.y, mouseLook.x, player.transform.localRotation.z);
+		player.transform.eulerAngles = new Vector3(player.transform.localRotation.x, mouseLook.x, player.transform.localRotation.z);
 		if (playerManager.player.flip) {
 
 		}
 		else {
-			
+
 		}
 
 	}
