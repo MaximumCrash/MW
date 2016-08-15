@@ -299,6 +299,7 @@ public class playerManager : MonoBehaviour {
 			}
 			else
 			{
+				GetComponent<Rigidbody>().AddForce(0, -verticalAddForce/2, 0);
 				Physics.gravity = new Vector3 (0, -15.81f, 0);
 			}
 
@@ -313,6 +314,7 @@ public class playerManager : MonoBehaviour {
 			}
 			else
 			{
+				GetComponent<Rigidbody>().AddForce(0, verticalAddForce/2, 0);
 				Physics.gravity = new Vector3 (0, 15.81f, 0);
 			}
 		}
@@ -442,7 +444,9 @@ public class playerManager : MonoBehaviour {
 	{
 		foreach (ContactPoint contact in collision.contacts)
 		{
-			if (Vector3.Angle(contact.normal, Vector3.up) < maxSlope)
+			Debug.Log(Vector3.Angle(contact.normal, Vector3.up));
+			//Debug.Log(GetComponent<Rigidbody>().useGravity);
+		 	if (Vector3.Angle(contact.normal, Vector3.up) < maxSlope)
 			{
 
 				if (!_onGround) {
@@ -454,7 +458,7 @@ public class playerManager : MonoBehaviour {
 			}
 		}
 
-		if (CollisionFlags.Above != 0) {
+		if (CollisionFlags.Above != 0 && _flip) {
 			if (!_onGround) {
 				cam.GetComponent<carHeadBob>().Landing();
 				GetComponent<Rigidbody>().useGravity = false;
