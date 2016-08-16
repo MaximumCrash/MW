@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/ootii/ActorController/Demos/Scenes/AC_NavMesh.unity
+  isLoaded: 1
+  isActive: 1
