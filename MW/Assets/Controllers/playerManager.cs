@@ -88,12 +88,17 @@ public class playerManager : MonoBehaviour {
 	private Transform myTransform;
 	public 	BoxCollider boxCollider;
 
+	private float turnAngle = 0;
+	public float sensitivity = 25.0f;
+	public float smoothing = 2.0f;
+	private float	smoothV;
+
 	private void Start()
 	{
 		myNormal = transform.up;
 		myTransform = transform;
 		GetComponent<Rigidbody>().freezeRotation = true;
-		distGround = boxCollider.extents.y - boxCollider.center.y;
+		distGround = boxCollider.size.y/2 - boxCollider.center.y;
 	}
 
 	void Awake()
@@ -128,9 +133,9 @@ public class playerManager : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		//GetComponent<Rigidbody>().AddForce(-gravity*GetComponent<Rigidbody>().mass*myNormal);
+		GetComponent<Rigidbody>().AddForce(-gravity*myNormal);
 			//Debug.Log(GetComponent<Rigidbody>().useGravity);
-			Debug.Log(_currentSpeed.magnitude);
+			Debug.Log(myNormal.y);
 		_currentSpeed = new Vector2(GetComponent<Rigidbody>().velocity.x,GetComponent<Rigidbody>().velocity.z);
 		timer += Time.deltaTime;
 
@@ -298,11 +303,13 @@ public class playerManager : MonoBehaviour {
 			{
 				GetComponent<Rigidbody>().AddForce(0, -verticalAddForce, 0);
 				Physics.gravity = new Vector3 (0, -15.81f, 0);
+				//gravity = -15.81f;
 			}
 			else
 			{
 				GetComponent<Rigidbody>().AddForce(0, -verticalAddForce/2, 0);
 				Physics.gravity = new Vector3 (0, -15.81f, 0);
+				//gravity = -15.81f;
 			}
 
 		}
@@ -312,12 +319,13 @@ public class playerManager : MonoBehaviour {
 			{
 				GetComponent<Rigidbody>().AddForce(0, verticalAddForce, 0);
 				Physics.gravity = new Vector3 (0, 15.81f, 0);
-
+				//gravity = 15.81f;
 			}
 			else
 			{
 				GetComponent<Rigidbody>().AddForce(0, verticalAddForce/2, 0);
 				Physics.gravity = new Vector3 (0, 15.81f, 0);
+				//gravity = 15.81f;
 			}
 		}
 		_onGround = false;
@@ -347,7 +355,7 @@ public class playerManager : MonoBehaviour {
 
 	void Update()
 	{
-		/*
+
 		Ray ray;
 		RaycastHit hit;
 
@@ -361,14 +369,20 @@ public class playerManager : MonoBehaviour {
 			surfaceNormal = Vector3.up;
 		}
 
-
 		myNormal = Vector3.Lerp(myNormal, surfaceNormal, lerpSpeed*Time.deltaTime);
 
 		Vector3 myForward = Vector3.Cross(myTransform.right, myNormal);
 
-		Quaternion targetRot = Quaternion.LookRotation(myForward, myNormal);
-		myTransform.rotation = Quaternion.Lerp(myTransform.rotation, targetRot, lerpSpeed*Time.deltaTime);
-*/
+		float turn = (sensitivity*smoothing)*(Input.GetAxis("Mouse X") * Time.deltaTime);
+		smoothV = Mathf.Lerp(smoothV, turn, 1f / smoothing);
+		turn += smoothV;
+    turnAngle = (turnAngle + turn) % 360; // update character direction
+
+		// rotate character to myNormal...
+    Quaternion rot = Quaternion.FromToRotation(Vector3.up, myNormal);
+    rot *= Quaternion.Euler(0,turnAngle,0); // and to current direction
+    transform.rotation = rot;
+
 
 		if (Input.GetKeyDown (KeyCode.Escape))
 			Cursor.lockState = wantedMode = CursorLockMode.None;
@@ -456,7 +470,7 @@ public class playerManager : MonoBehaviour {
 	{
 		foreach (ContactPoint contact in collision.contacts)
 		{
-			Debug.Log(Vector3.Angle(contact.normal, Vector3.up));
+			//Debug.Log(Vector3.Angle(contact.normal, Vector3.up));
 		 	if (Vector3.Angle(contact.normal, Vector3.up) < maxSlope)
 			{
 				if (!_onGround)
@@ -482,6 +496,6 @@ public class playerManager : MonoBehaviour {
 	void OnCollisionExit()
 	{
 		_onGround = false;
-		GetComponent<Rigidbody>().useGravity = true;
+		//GetComponent<Rigidbody>().useGravity = true;
 	}
 }
