@@ -7,6 +7,16 @@ public class playerManager : MonoBehaviour {
 
 	public enum WalkSetting {Code, Custom};
 
+	public Transform CachedTransform { get; private set; }
+
+	public float SpeedFactor
+	{
+		get
+		{
+			return _currentSpeed.magnitude;
+		}
+	}
+
 	[Space(5)]
 	[Header ("Player Walk Setting")]
 	public WalkSetting walkSetting;
