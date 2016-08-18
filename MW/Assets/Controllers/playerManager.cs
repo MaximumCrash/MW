@@ -3,9 +3,22 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class playerManager : MonoBehaviour {
+
+	public Text speedUI;
+
 	public static playerManager player;
 
 	public enum WalkSetting {Code, Custom};
+
+	public Transform CachedTransform { get; private set; }
+
+	public float SpeedFactor
+	{
+		get
+		{
+			return _currentSpeed.magnitude;
+		}
+	}
 
 	[Space(5)]
 	[Header ("Player Walk Setting")]
@@ -80,6 +93,7 @@ public class playerManager : MonoBehaviour {
 
 	void Awake()
 	{
+		CachedTransform = transform;
 		wantedMode = CursorLockMode.Locked;
 		SetCursorState ();
 		player = this;
@@ -325,7 +339,7 @@ public class playerManager : MonoBehaviour {
 
 	void Update()
 	{
-
+		speedUI.text = "Speed:" + Mathf.Floor(_currentSpeed.magnitude).ToString();
 		if (Input.GetKeyDown (KeyCode.Escape))
 			Cursor.lockState = wantedMode = CursorLockMode.None;
 
