@@ -1,0 +1,269 @@
+-debug
+-target:library
+-nowarn:0169
+-out:'Temp/Assembly-CSharp.dll'
+-r:'/Applications/Unity/Unity.app/Contents/Managed/UnityEngine.dll'
+-r:'Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll'
+-r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll'
+-r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll'
+-r:'Assets/ProCore/ProBuilder/Classes/ProBuilderCore-Unity5.dll'
+-r:'Assets/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll'
+-r:'Assets/ProCore/ProBuilder/Classes/ClassesLib/KDTree.dll'
+-r:'Assets/ProCore/ProBuilder/Classes/ClassesLib/Triangle.dll'
+-r:'/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.dll'
+-r:'/Applications/Unity/PlaybackEngines/AppleTVSupport/UnityEditor.iOS.Extensions.Common.dll'
+-r:'/Applications/Unity/PlaybackEngines/AppleTVSupport/UnityEditor.iOS.Extensions.Xcode.dll'
+-r:'/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll'
+-r:'/Applications/Unity/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll'
+-define:UNITY_5_3_OR_NEWER
+-define:UNITY_5_4_OR_NEWER
+-define:UNITY_5_4_0
+-define:UNITY_5_4
+-define:UNITY_5
+-define:ENABLE_NEW_BUGREPORTER
+-define:ENABLE_AUDIO
+-define:ENABLE_CACHING
+-define:ENABLE_CLOTH
+-define:ENABLE_DUCK_TYPING
+-define:ENABLE_EDITOR_RETINA
+-define:ENABLE_RETINA_GUISTYLES
+-define:ENABLE_FRAME_DEBUGGER
+-define:ENABLE_GENERICS
+-define:ENABLE_HOME_SCREEN
+-define:ENABLE_IMAGEEFFECTS
+-define:ENABLE_LIGHT_PROBES_LEGACY
+-define:ENABLE_MICROPHONE
+-define:ENABLE_MULTIPLE_DISPLAYS
+-define:ENABLE_PHYSICS
+-define:ENABLE_PLUGIN_INSPECTOR
+-define:ENABLE_SHADOWS
+-define:ENABLE_SPRITERENDERER_FLIPPING
+-define:ENABLE_SPRITES
+-define:ENABLE_SPRITE_POLYGON
+-define:ENABLE_TERRAIN
+-define:ENABLE_RAKNET
+-define:ENABLE_UNET
+-define:ENABLE_UNITYEVENTS
+-define:ENABLE_VR
+-define:ENABLE_WEBCAM
+-define:ENABLE_WWW
+-define:ENABLE_CLOUD_SERVICES
+-define:ENABLE_CLOUD_SERVICES_COLLAB
+-define:ENABLE_CLOUD_SERVICES_ADS
+-define:ENABLE_CLOUD_HUB
+-define:ENABLE_CLOUD_PROJECT_ID
+-define:ENABLE_CLOUD_SERVICES_CRASH_REPORTING
+-define:ENABLE_CLOUD_SERVICES_PURCHASING
+-define:ENABLE_CLOUD_SERVICES_ANALYTICS
+-define:ENABLE_CLOUD_SERVICES_UNET
+-define:ENABLE_CLOUD_SERVICES_BUILD
+-define:ENABLE_CLOUD_LICENSE
+-define:ENABLE_EDITOR_METRICS
+-define:ENABLE_EDITOR_METRICS_CACHING
+-define:INCLUDE_DYNAMIC_GI
+-define:INCLUDE_GI
+-define:INCLUDE_IL2CPP
+-define:INCLUDE_DIRECTX12
+-define:PLATFORM_SUPPORTS_MONO
+-define:RENDER_SOFTWARE_CURSOR
+-define:INCLUDE_PUBNUB
+-define:ENABLE_LOCALIZATION
+-define:ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION
+-define:ENABLE_EDITOR_TESTS_RUNNER
+-define:UNITY_STANDALONE_WIN
+-define:UNITY_STANDALONE
+-define:ENABLE_SUBSTANCE
+-define:ENABLE_TEXTUREID_MAP
+-define:ENABLE_RUNTIME_GI
+-define:ENABLE_MOVIES
+-define:ENABLE_NETWORK
+-define:ENABLE_CRUNCH_TEXTURE_COMPRESSION
+-define:ENABLE_UNITYWEBREQUEST
+-define:ENABLE_EVENT_QUEUE
+-define:ENABLE_CLUSTERINPUT
+-define:ENABLE_WEBSOCKET_HOST
+-define:ENABLE_MONO
+-define:ENABLE_PROFILER
+-define:DEBUG
+-define:TRACE
+-define:UNITY_ASSERTIONS
+-define:UNITY_EDITOR
+-define:UNITY_EDITOR_64
+-define:UNITY_EDITOR_OSX
+-define:UNITY_TEAM_LICENSE
+-define:CROSS_PLATFORM_INPUT
+'Assets/Chronos/Example/ExampleBaseBehaviour.cs'
+'Assets/Chronos/Example/ExampleBubble.cs'
+'Assets/Chronos/Example/ExampleNavigator.cs'
+'Assets/Chronos/Example/ExampleOccurrences.cs'
+'Assets/Chronos/Example/ExamplePhysics.cs'
+'Assets/Chronos/Example/ExampleSlider.cs'
+'Assets/Chronos/Example/ExampleSpin.cs'
+'Assets/Chronos/Example/ExampleTimeColor.cs'
+'Assets/Chronos/PlayMaker/ChronosComponentAction.cs'
+'Assets/Chronos/PlayMaker/GetBaseSpeed.cs'
+'Assets/Chronos/PlayMaker/GetClockInfo.cs'
+'Assets/Chronos/PlayMaker/GetGlobalClock.cs'
+'Assets/Chronos/PlayMaker/GetTimelineInfo.cs'
+'Assets/Chronos/PlayMaker/PauseClock.cs'
+'Assets/Chronos/PlayMaker/Physics 2D/AddForce2d.cs'
+'Assets/Chronos/PlayMaker/Physics 2D/AddTorque2d.cs'
+'Assets/Chronos/PlayMaker/Physics 2D/GetMass2d.cs'
+'Assets/Chronos/PlayMaker/Physics 2D/GetSpeed2d.cs'
+'Assets/Chronos/PlayMaker/Physics 2D/GetVelocity2d.cs'
+'Assets/Chronos/PlayMaker/Physics 2D/IsKinematic2d.cs'
+'Assets/Chronos/PlayMaker/Physics 2D/SetIsKinematic2d.cs'
+'Assets/Chronos/PlayMaker/Physics 2D/SetMass2d.cs'
+'Assets/Chronos/PlayMaker/Physics 2D/SetVelocity2d.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/AddExplosionForce.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/AddForce.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/AddTorque.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/GetMass.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/GetSpeed.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/GetVelocity.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/IsKinematic.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/SetDrag.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/SetIsKinematic.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/SetMass.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/SetVelocity.cs'
+'Assets/Chronos/PlayMaker/Physics 3D/UseGravity.cs'
+'Assets/Chronos/PlayMaker/ReleaseAreaClock.cs'
+'Assets/Chronos/PlayMaker/ReleaseTimeline.cs'
+'Assets/Chronos/PlayMaker/ScaleClockTime.cs'
+'Assets/Chronos/PlayMaker/ScaleClockTimeSmoothly.cs'
+'Assets/Chronos/PlayMaker/ScaleGlobalClockTime.cs'
+'Assets/Chronos/PlayMaker/ScaleGlobalClockTimeSmoothly.cs'
+'Assets/Chronos/PlayMaker/Schedule.cs'
+'Assets/Chronos/PlayMaker/SetBaseSpeed.cs'
+'Assets/Chronos/PlayMaker/TimelineStateSwitch.cs'
+'Assets/Chronos/Source/AreaClock.cs'
+'Assets/Chronos/Source/AreaClock2D.cs'
+'Assets/Chronos/Source/AreaClock3D.cs'
+'Assets/Chronos/Source/ChronosException.cs'
+'Assets/Chronos/Source/Clock.cs'
+'Assets/Chronos/Source/ComponentTimeline.cs'
+'Assets/Chronos/Source/CustomRecorder.cs'
+'Assets/Chronos/Source/Dependencies/Reflection/AnimatorParameter.cs'
+'Assets/Chronos/Source/Dependencies/Reflection/FilterAttribute.cs'
+'Assets/Chronos/Source/Dependencies/Reflection/SelfTargetedAttribute.cs'
+'Assets/Chronos/Source/Dependencies/Reflection/TypeFamily.cs'
+'Assets/Chronos/Source/Dependencies/Reflection/UnityMember.cs'
+'Assets/Chronos/Source/Dependencies/Reflection/UnityMethod.cs'
+'Assets/Chronos/Source/Dependencies/Reflection/UnityVariable.cs'
+'Assets/Chronos/Source/Dependencies/Reflection/Utilities/Extensions.cs'
+'Assets/Chronos/Source/Dependencies/Reflection/Utilities/TypeSerializer.cs'
+'Assets/Chronos/Source/GlobalClock.cs'
+'Assets/Chronos/Source/GlobalClockAttribute.cs'
+'Assets/Chronos/Source/LocalClock.cs'
+'Assets/Chronos/Source/Occurrences/ActionOccurence.cs'
+'Assets/Chronos/Source/Occurrences/ForwardActionOccurrence.cs'
+'Assets/Chronos/Source/Occurrences/FuncOccurence.cs'
+'Assets/Chronos/Source/Occurrences/Occurrence.cs'
+'Assets/Chronos/Source/Recorder.cs'
+'Assets/Chronos/Source/RecorderTimeline.cs'
+'Assets/Chronos/Source/TimeState.cs'
+'Assets/Chronos/Source/Timekeeper.cs'
+'Assets/Chronos/Source/Timeline.cs'
+'Assets/Chronos/Source/TimelineChild.cs'
+'Assets/Chronos/Source/TimelineEffector.cs'
+'Assets/Chronos/Source/Timelines/AnimationTimeline.cs'
+'Assets/Chronos/Source/Timelines/AnimatorTimeline.cs'
+'Assets/Chronos/Source/Timelines/AudioSourceTimeline.cs'
+'Assets/Chronos/Source/Timelines/IParticleSystemTimeline.cs'
+'Assets/Chronos/Source/Timelines/NavMeshAgentTimeline.cs'
+'Assets/Chronos/Source/Timelines/NonRewindableParticleSystemTimeline.cs'
+'Assets/Chronos/Source/Timelines/RewindableParticleSystemTimeline.cs'
+'Assets/Chronos/Source/Timelines/RigidbodyTimeline.cs'
+'Assets/Chronos/Source/Timelines/RigidbodyTimeline2D.cs'
+'Assets/Chronos/Source/Timelines/RigidbodyTimeline3D.cs'
+'Assets/Chronos/Source/Timelines/TerrainTimeline.cs'
+'Assets/Chronos/Source/Timelines/TransformTimeline.cs'
+'Assets/Chronos/Source/Timelines/WindZoneTimeline.cs'
+'Assets/Chronos/Source/Utilities/Severity.cs'
+'Assets/Chronos/Source/Utilities/Singleton.cs'
+'Assets/Colr/DemoScenes/Common/Scripts/CameraMouseOrbit.cs'
+'Assets/Colr/Scripts/ScreenColorTransition.cs'
+'Assets/Controllers/carHeadBob.cs'
+'Assets/Controllers/carMouseLook.cs'
+'Assets/Controllers/cloneController.cs'
+'Assets/Controllers/playerManager.cs'
+'Assets/ParticleHandler.cs'
+'Assets/ProCore/ProBuilder/API Examples/Icosphere FFT/Scripts/CameraControls.cs'
+'Assets/ProCore/ProBuilder/API Examples/Icosphere FFT/Scripts/IcoBumpin.cs'
+'Assets/ProCore/ProBuilder/API Examples/Misc/HueCube.cs'
+'Assets/ProCore/ProBuilder/API Examples/Runtime Editing/RuntimeEdit.cs'
+'Assets/SpaceJourney/Plugins/ColorSuite/ColorSuite.cs'
+'Assets/SpaceJourney/Plugins/Glitch/AnalogGlitch.cs'
+'Assets/SpaceJourney/Plugins/Glitch/DigitalGlitch.cs'
+'Assets/SpaceJourney/Plugins/Space Ship/Crosshair.cs'
+'Assets/SpaceJourney/Plugins/Space Ship/CustomCursor.cs'
+'Assets/SpaceJourney/Plugins/Space Ship/EnginePlasma.cs'
+'Assets/SpaceJourney/Plugins/Space Ship/ParticleFollow.cs'
+'Assets/SpaceJourney/Plugins/Space Ship/SpaceshipController.cs'
+'Assets/SpaceJourney/Plugins/Time Control/TimeScale.cs'
+'Assets/ootii/ActorController/Code/Actors/CharacterControllers/ActorController.cs'
+'Assets/ootii/ActorController/Code/Actors/CharacterControllers/ActorDriver.cs'
+'Assets/ootii/ActorController/Code/Actors/CharacterControllers/ActorState.cs'
+'Assets/ootii/ActorController/Code/Actors/CharacterControllers/Drivers/AnimatorDriver.cs'
+'Assets/ootii/ActorController/Code/Actors/CharacterControllers/Drivers/NavMeshDriver.cs'
+'Assets/ootii/ActorController/Demos/Code/ACDemo1_Core.cs'
+'Assets/ootii/ActorController/Demos/Code/DemoUI.cs'
+'Assets/ootii/ActorController/Demos/Code/GhostAIDriver.cs'
+'Assets/ootii/ActorController/Demos/Code/PlatformMover.cs'
+'Assets/ootii/ActorController/Demos/Code/SphereDriver.cs'
+'Assets/ootii/ActorController/Demos/Code/Spider2DDriver.cs'
+'Assets/ootii/ActorController/Demos/Code/SpiderAIDriver.cs'
+'Assets/ootii/ActorController/Demos/Code/SpiderDriver.cs'
+'Assets/ootii/ActorController/Demos/Code/TerrainHoleActivator.cs'
+'Assets/ootii/ActorController/Demos/Code/Tut_2D_Driver_01.cs'
+'Assets/ootii/ActorController/Demos/Code/Tut_2D_Driver_02.cs'
+'Assets/ootii/ActorController/Demos/Code/Tut_2D_Driver_03.cs'
+'Assets/ootii/ActorController/Demos/Code/Tut_2D_Driver_04.cs'
+'Assets/ootii/Framework_v1/Code/Actors/BaseSystemController.cs'
+'Assets/ootii/Framework_v1/Code/Actors/CharacterControllers/BodyShape.cs'
+'Assets/ootii/Framework_v1/Code/Actors/CharacterControllers/BodyShapeHit.cs'
+'Assets/ootii/Framework_v1/Code/Actors/CharacterControllers/BodyShapes/BodyCapsule.cs'
+'Assets/ootii/Framework_v1/Code/Actors/CharacterControllers/BodyShapes/BodySphere.cs'
+'Assets/ootii/Framework_v1/Code/Actors/CharacterControllers/ICharacterController.cs'
+'Assets/ootii/Framework_v1/Code/Base/BaseMonoObject.cs'
+'Assets/ootii/Framework_v1/Code/Base/BaseObject.cs'
+'Assets/ootii/Framework_v1/Code/Base/BaseScriptableObject.cs'
+'Assets/ootii/Framework_v1/Code/Base/IBaseObject.cs'
+'Assets/ootii/Framework_v1/Code/Cameras/BaseCameraRig.cs'
+'Assets/ootii/Framework_v1/Code/Cameras/FollowRig.cs'
+'Assets/ootii/Framework_v1/Code/Cameras/IBaseCameraRig.cs'
+'Assets/ootii/Framework_v1/Code/Cameras/ScrollerRig.cs'
+'Assets/ootii/Framework_v1/Code/Collections/ArrayExt.cs'
+'Assets/ootii/Framework_v1/Code/Collections/ObjectPool.cs'
+'Assets/ootii/Framework_v1/Code/Data/Serializers/SerializationAttributes.cs'
+'Assets/ootii/Framework_v1/Code/Geometry/GeometryExt.cs'
+'Assets/ootii/Framework_v1/Code/Geometry/Matrix4x4Ext.cs'
+'Assets/ootii/Framework_v1/Code/Geometry/MeshExt.cs'
+'Assets/ootii/Framework_v1/Code/Geometry/MeshOctree.cs'
+'Assets/ootii/Framework_v1/Code/Geometry/MeshOctreeNode.cs'
+'Assets/ootii/Framework_v1/Code/Geometry/MeshPartitioner.cs'
+'Assets/ootii/Framework_v1/Code/Geometry/QuaternionExt.cs'
+'Assets/ootii/Framework_v1/Code/Geometry/RaycastExt.cs'
+'Assets/ootii/Framework_v1/Code/Geometry/TransformExt.cs'
+'Assets/ootii/Framework_v1/Code/Geometry/Vector3Ext.cs'
+'Assets/ootii/Framework_v1/Code/Helpers/EditorHelper.cs'
+'Assets/ootii/Framework_v1/Code/Helpers/InputManagerHelper.cs'
+'Assets/ootii/Framework_v1/Code/Helpers/InterfaceHelper.cs'
+'Assets/ootii/Framework_v1/Code/Helpers/NumberHelper.cs'
+'Assets/ootii/Framework_v1/Code/Helpers/ObjectHelper.cs'
+'Assets/ootii/Framework_v1/Code/Helpers/ReflectionHelper.cs'
+'Assets/ootii/Framework_v1/Code/Helpers/StringHelper.cs'
+'Assets/ootii/Framework_v1/Code/Helpers/VectorHelper.cs'
+'Assets/ootii/Framework_v1/Code/Helpers/XMLHelper.cs'
+'Assets/ootii/Framework_v1/Code/Input/IInputSource.cs'
+'Assets/ootii/Framework_v1/Code/Input/UnityInputSource.cs'
+'Assets/ootii/Framework_v1/Code/Physics/Force.cs'
+'Assets/ootii/Framework_v1/Code/Timing/TimeManager.cs'
+'Assets/ootii/Framework_v1/Code/Utilities/Debug/DebugDraw.cs'
+'Assets/ootii/Framework_v1/Code/Utilities/Debug/Log.cs'
+'Assets/ootii/Framework_v1/Code/Utilities/Debug/LogText.cs'
+'Assets/ootii/Framework_v1/Code/Utilities/Debug/SceneFlags.cs'
+'Assets/ootii/Framework_v1/Code/Utilities/Profiler.cs'
+'Assets/ootii/Framework_v1/Code/Utilities/SimpleJSON.cs'
+-r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
+-r:'/Applications/Unity/Unity.app/Contents/Mono/lib/mono/unity/System.Xml.Linq.dll'

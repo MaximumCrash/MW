@@ -148,11 +148,6 @@
      <Compile Include="Assets\SpaceJourney\Plugins\ColorSuite\ColorSuite.cs" />
      <Compile Include="Assets\SpaceJourney\Plugins\Glitch\AnalogGlitch.cs" />
      <Compile Include="Assets\SpaceJourney\Plugins\Glitch\DigitalGlitch.cs" />
-     <Compile Include="Assets\SpaceJourney\Plugins\Space Ship\Crosshair.cs" />
-     <Compile Include="Assets\SpaceJourney\Plugins\Space Ship\CustomCursor.cs" />
-     <Compile Include="Assets\SpaceJourney\Plugins\Space Ship\EnginePlasma.cs" />
-     <Compile Include="Assets\SpaceJourney\Plugins\Space Ship\ParticleFollow.cs" />
-     <Compile Include="Assets\SpaceJourney\Plugins\Space Ship\SpaceshipController.cs" />
      <Compile Include="Assets\SpaceJourney\Plugins\Time Control\TimeScale.cs" />
      <Compile Include="Assets\ootii\ActorController\Code\Actors\CharacterControllers\ActorController.cs" />
      <Compile Include="Assets\ootii\ActorController\Code\Actors\CharacterControllers\ActorDriver.cs" />
