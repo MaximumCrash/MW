@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Chronos;
 
 public class playerManager : MonoBehaviour {
 
@@ -17,6 +18,14 @@ public class playerManager : MonoBehaviour {
 		get
 		{
 			return _currentSpeed.magnitude;
+		}
+	}
+
+	public Timeline time
+	{
+		get
+		{
+				return GetComponent<Timeline>();
 		}
 	}
 
@@ -91,6 +100,8 @@ public class playerManager : MonoBehaviour {
 
 	CursorLockMode wantedMode;
 
+	public ParticleSystem speedLines;
+
 	void Awake()
 	{
 		CachedTransform = transform;
@@ -142,22 +153,22 @@ public class playerManager : MonoBehaviour {
 			if (_currentSpeed.magnitude <= minimumSpeed+1)
 			{
 				_timeToStop = 0.1f;
-				_bobSpeed = 0.2f;
-				_bobAmount = 0.025f;
+				_bobSpeed = 0.3f;
+				_bobAmount = 0.035f;
 
 			}
 			else if (_currentSpeed.magnitude <= 25)
 			{
 				_timeToStop = 0.5f;
-				_bobSpeed = 0.35f;
-				_bobAmount = 0.032f;
+				_bobSpeed = 0.45f;
+				_bobAmount = 0.04f;
 
 			}
 			else if (_currentSpeed.magnitude <= 38)
 			{
 				_timeToStop = 0.64f;
-				_bobSpeed = 0.45f;
-				_bobAmount = 0.04f;
+				_bobSpeed = 0.5f;
+				_bobAmount = 0.06f;
 			}
 			else
 			{
@@ -339,6 +350,17 @@ public class playerManager : MonoBehaviour {
 
 	void Update()
 	{
+		Clock clock = Timekeeper.instance.Clock("World");
+
+/*
+		if (Input.GetKeyDown(KeyCode.e))
+		{
+			clock.localTimeScale = -1;
+		}
+		else {
+			clock.localTimeScale = 1;
+		}*/
+
 		speedUI.text = "Speed:" + Mathf.Floor(_currentSpeed.magnitude).ToString();
 		if (Input.GetKeyDown (KeyCode.Escape))
 			Cursor.lockState = wantedMode = CursorLockMode.None;
@@ -351,7 +373,7 @@ public class playerManager : MonoBehaviour {
 			//If Accelerating
 			if (_onGround)
 			{
-				accelerate(3f,10f);
+				accelerate(5f,15f);
 			}
 			else
 			{
@@ -359,13 +381,13 @@ public class playerManager : MonoBehaviour {
 				{
 					GetComponent<Rigidbody> ().AddRelativeForce(0, dropVelocity, 0);
 					dropVelocity += Time.deltaTime * 10;
-					accelerate(.5f, 2f);
+					accelerate(2f, 5f);
 				}
 				else
 				{
 					GetComponent<Rigidbody> ().AddRelativeForce (0, -dropVelocity, 0);
 					dropVelocity -= Time.deltaTime * 10;
-					accelerate(.5f, 2f);
+					accelerate(2f, 5f);
 				}
 			}
 		}
