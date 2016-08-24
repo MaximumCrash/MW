@@ -90,6 +90,8 @@ public class playerManager : MonoBehaviour {
 	private float floorOldY;
 	public float myRot = 0f;
 
+	public bool initRun = false;
+
 	private float _floorCaster;
 	public float floorCaster {get {return _floorCaster;}}
 
@@ -196,7 +198,7 @@ public class playerManager : MonoBehaviour {
 			if (_onGround && _currentSpeed.magnitude < minimumSpeed);
 			{
 				//Complete Stop.
-				eBrake();
+				//eBrake();
 			}
 		}
 
@@ -373,7 +375,12 @@ public class playerManager : MonoBehaviour {
 			//If Accelerating
 			if (_onGround)
 			{
-				accelerate(5f,15f);
+				if (!initRun) {
+					GetComponent<Rigidbody>().AddRelativeForce(Input.GetAxis("Horizontal") * (_forceAcceleration*30), 0, Input.GetAxis("Vertical") * (_forceAcceleration*30));
+					initRun = true;
+				}
+
+				accelerate(8f,15f);
 			}
 			else
 			{
